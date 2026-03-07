@@ -26,6 +26,7 @@ def get_todos(db: Session = Depends(get_db)):
 
 @app.post("/todos", response_model=schemas.Todo)
 def create_todo(todo: schemas.TodoCreate, db: Session = Depends(get_db)):
+    print(f"Creating TODO with title: {todo.title}")
     db_todo = models.Todo(title=todo.title, completed=False)
     db.add(db_todo)
     db.commit()
